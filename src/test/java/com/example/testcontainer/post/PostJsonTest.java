@@ -15,7 +15,7 @@ public class PostJsonTest {
     private JacksonTester<Post> jacksonTester;
 
     @Test
-    void shouldSerializePost() throws Exception {
+    public void shouldSerializePost() throws Exception {
 
         Post post = new Post(1,1,"Hello, World!", "This is my first post.",null);
         String expected = """
@@ -31,7 +31,7 @@ public class PostJsonTest {
     }
 
     @Test
-    void shouldDeserializePost() throws Exception {
+    public void shouldDeserializePost() throws Exception {
         Post post = new Post(1,1,"Hello, World!", "This is my first post.",null);
         String content = """
                 {

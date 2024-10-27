@@ -8,7 +8,6 @@ import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.context.annotation.Import;
 import org.testcontainers.containers.PostgreSQLContainer;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -29,25 +28,25 @@ public class PostRepositoryTest {
     private PostRepository postRepository;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         List<Post> posts = List.of(new Post(1,1,"Hello, World!", "This is my first post!",null));
         postRepository.saveAll(posts);
     }
 
     @Test
-    void connectionEstablished() {
+    public void connectionEstablished() {
         assertThat(postgres.isCreated()).isTrue();
         assertThat(postgres.isRunning()).isTrue();
     }
 
     @Test
-    void shouldReturnPostByTitle() {
+    public void shouldReturnPostByTitle() {
         Post post = postRepository.findByTitle("Hello, World!").orElseThrow();
         assertEquals("Hello, World!", post.title(), "Post title should be 'Hello, World!'");
     }
 
     @Test
-    void shouldNotReturnPostWhenTitleIsNotFound() {
+    public void shouldNotReturnPostWhenTitleIsNotFound() {
         Optional<Post> post = postRepository.findByTitle("Hello, Wrong Title!");
         assertFalse(post.isPresent(), "Post should not be present");
     }
